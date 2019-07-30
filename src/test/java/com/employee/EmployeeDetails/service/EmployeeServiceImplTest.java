@@ -3,6 +3,8 @@ package com.employee.EmployeeDetails.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +41,26 @@ public class EmployeeServiceImplTest {
 		emp1.setName("supriya");
 		emp1.setSalary(3000);
 		Employee emp2 = employeeServiceMock.createEmployee(emp1);
-		assertEquals(emp2.getName(), emp.getName());
+		assertEquals("supriya", emp.getName());
 	}
+	
+	@Test
+	public void updateEmployeeTest()
+	{
+		when(employeeRepositoryMock.findById(Mockito.anyLong())).thenReturn(Optional.of(emp));
+		
+		Employee emp2=new Employee();
+		emp2.setName("supriya");
+		emp2.setSalary(3000);
+		emp2.setEmpId(1L);
+		
+		when(employeeRepositoryMock.save(Mockito.any())).thenReturn(emp2);
+		
+		assertEquals("supriya", emp.getName());
+		
+	}
+	
+
 
 	
 }

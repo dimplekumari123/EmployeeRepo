@@ -34,13 +34,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public Employee updateEmployee(long id, Employee emp) throws RecordNotFoundException {
 
-		Employee empRepo1 = empRepo.findById(id).get();
-        if(empRepo1.getEmpId() != null && empRepo1.getSalary()<=0) {
-		empRepo1.setName(emp.getName());
-		empRepo1.setSalary(emp.getSalary());
-		empRepo.save(empRepo1);
+		Employee store=null;
+		
+		Optional<Employee> empRepo1 = empRepo.findById(id);
+		if(empRepo1.isPresent())
+       {
+			store.setName(emp.getName());
+			store.setSalary(emp.getSalary());
+	    	empRepo.save(store);
 
-		return empRepo1;
+		return store;
 	}
 	else 
 		throw new RecordNotFoundException("No employee record exist for given id"); 

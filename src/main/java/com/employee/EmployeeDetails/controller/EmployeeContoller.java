@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.employee.EmployeeDetails.entity.Employee;
 import com.employee.EmployeeDetails.exception.RecordNotFoundException;
-import com.employee.EmployeeDetails.service.EmployeeServiceImpl;
-
-import net.bytebuddy.asm.Advice.Return;
+import com.employee.EmployeeDetails.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeContoller {
 	@Autowired
-	EmployeeServiceImpl employeeServiceImpl;
+	EmployeeService employeeServiceImpl;
 
 	@PostMapping("/createEmp")
 	public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp) {
